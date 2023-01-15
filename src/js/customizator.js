@@ -54,7 +54,7 @@ export default class Customizator {
     }
 
     injectStyle() {
-        const style = document.createElement('style'); // мы можем закинуть из js'a элемент с тегом script, который будет содержать стили и они применятся, когда DOM структура зарендерится
+        const style = document.createElement('style'); // мы можем закинуть из js'a элемент с тегом style, который будет содержать стили и они применятся, когда DOM структура зарендерится
         style.innerHTML = `
             .panel {
                 display: flex;
@@ -151,7 +151,7 @@ export default class Customizator {
                         {opacity: 0.95},
                         {opacity: 1},
                     ], {
-                        duration: 2000
+                        duration: 1000
                     });
                 }
 
@@ -162,7 +162,7 @@ export default class Customizator {
                             {opacity: 0.95},
                             {opacity: 1},
                         ], {
-                            duration: 2000
+                            duration: 1000
                         });
 
                         elem.style.display = '';

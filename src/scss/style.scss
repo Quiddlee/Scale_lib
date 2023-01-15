@@ -1,4 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&display=swap');
+
 * {
+    font-family: 'Open Sans', sans-serif;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -22,6 +25,8 @@
 
 hr {
     margin-top: 30px;
+    border-bottom: none;
+    border-top: 0.5px solid rgba(0, 0, 0, 0.1);
 }
 
 .blocks {
@@ -29,6 +34,7 @@ hr {
     display: flex;
     justify-content: space-around;
     &_item {
+        border-radius: 10px;
         width: 360px;
         padding: 20px;
         border: 1px solid rgba(0,0,0, .1);

@@ -5293,7 +5293,7 @@ var Customizator = /*#__PURE__*/function () {
   }, {
     key: "injectStyle",
     value: function injectStyle() {
-      var style = document.createElement('style'); // мы можем закинуть из js'a элемент с тегом script, который будет содержать стили и они применятся, когда DOM структура зарендерится
+      var style = document.createElement('style'); // мы можем закинуть из js'a элемент с тегом style, который будет содержать стили и они применятся, когда DOM структура зарендерится
       style.innerHTML = "\n            .panel {\n                display: flex;\n                justify-content: space-between;\n                align-items: center;\n                position: fixed;\n                top: 20px;\n                right: 20px;\n                border: 1px solid rgba(0,0,0, .2);\n                box-shadow: 0 0 10px rgb(0 0 0 / 20%);\n                width: 40px;\n                height: 40px;\n                background-color: #ffffff;\n                border-radius: 100px;\n                overflow: hidden;\n                transition: 0.5s all;\n            }\n            \n            .panel:hover {\n                justify-content: space-around;\n                width: 170px;\n                border-radius: 20px;\n            }\n        \n            .scale {\n                display: flex;\n                justify-content: space-around;\n                align-items: center;\n                width: 90px;\n                height: 40px;\n            }\n            \n            .scale_btn {\n                display: block;\n                width: 35px;\n                height: 35px;\n                border: 1px solid;\n                border-color: #ffffff;\n                border-radius: 8px;\n                font-size: 12px;\n                color: black;\n                cursor: pointer;\n                transition: 0.3s all;\n                background-color: #fcfbfc;\n            }\n            \n            .scale_btn:hover {\n                background-color: #e2e2e2;\n            }\n        \n            .color {\n                width: 30px;\n                height: 32px;\n                border: none;\n                border-radius: 10%;\n                cursor: pointer;\n                transition: 0.3s all;\n            }\n            \n            .clear {\n                font-size: 20px;\n                cursor: pointer;\n                margin-right: 5px;\n                align-items: center;\n            }\n        ";
       document.querySelector('head').appendChild(style);
     }
@@ -5327,7 +5327,7 @@ var Customizator = /*#__PURE__*/function () {
             }, {
               opacity: 1
             }], {
-              duration: 2000
+              duration: 1000
             });
           }
           _toConsumableArray(child.children).forEach(function (elem) {
@@ -5339,7 +5339,7 @@ var Customizator = /*#__PURE__*/function () {
               }, {
                 opacity: 1
               }], {
-                duration: 2000
+                duration: 1000
               });
               elem.style.display = '';
             }
