@@ -14,13 +14,13 @@ export default class Customizator {
     onScaleChange(event) {
         const body = document.querySelector('body');
 
-        if (event) {
+        if (event && event.target.tagName !== 'DIV') {
             this.scale = +event.target.value.replace(/x/g, '');
         }
 
         const recursion = (element) => {
             element.childNodes.forEach(node => {
-                if (node.nodeName === '#text' && node.nodeValue.replace(/\s+/g, '').length > 0) {
+                if (node.nodeName === '#text' && node.nodeValue.replace(/\s+/g, '').length > 0 && node.textContent !== '×') {
 
                     if (!node.parentNode.getAttribute('data-fz')) {
                         let value = window.getComputedStyle(node.parentNode, null ).fontSize;
@@ -58,43 +58,67 @@ export default class Customizator {
         style.innerHTML = `
             .panel {
                 display: flex;
-                justify-content: space-around;
+                justify-content: space-between;
                 align-items: center;
                 position: fixed;
-                top: 10px;
-                right: 0;
+                top: 20px;
+                right: 20px;
                 border: 1px solid rgba(0,0,0, .2);
-                box-shadow: 0 0 20px rgba(0,0,0, .5);
-                width: 300px;
-                height: 60px;
-                background-color: #fff;
+                box-shadow: 0 0 10px rgb(0 0 0 / 20%);
+                width: 40px;
+                height: 40px;
+                background-color: #ffffff;
+                border-radius: 100px;
+                overflow: hidden;
+                transition: 0.5s all;
+            }
+            
+            .panel:hover {
+                justify-content: space-around;
+                width: 170px;
+                border-radius: 20px;
             }
         
             .scale {
                 display: flex;
                 justify-content: space-around;
                 align-items: center;
-                width: 100px;
+                width: 90px;
                 height: 40px;
             }
             
             .scale_btn {
                 display: block;
-                width: 40px;
-                height: 40px;
-                border: 1px solid rgba(0,0,0, .2);
-                border-radius: 4px;
-                font-size: 18px;
+                width: 35px;
+                height: 35px;
+                border: 1px solid;
+                border-color: #ffffff;
+                border-radius: 8px;
+                font-size: 12px;
+                color: black;
+                cursor: pointer;
+                transition: 0.3s all;
+                background-color: #fcfbfc;
+            }
+            
+            .scale_btn:hover {
+                background-color: #e2e2e2;
             }
         
             .color {
-                width: 40px;
-                height: 40px;
+                width: 30px;
+                height: 32px;
+                border: none;
+                border-radius: 10%;
+                cursor: pointer;
+                transition: 0.3s all;
             }
             
             .clear {
                 font-size: 20px;
                 cursor: pointer;
+                margin-right: 5px;
+                align-items: center;
             }
         `;
         document.querySelector('head').appendChild(style);
