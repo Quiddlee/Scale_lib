@@ -132,14 +132,71 @@ export default class Customizator {
         this.onScaleChange();
     }
 
-    render() {
-        this.injectStyle();
-        this.setBgColor();
-        this.onScaleChange();
+    bindPanel(panel) {
+        [...panel.children].forEach(child => {
+            child.style.display = 'none';
 
+            [...child.children].forEach(elem => {
+                if ((+elem.value.replace(/x/, '') === +localStorage.getItem('scale'))) {
+                    elem.style.display = '';
+                }
+            });
+        });
+
+        panel.addEventListener('mouseenter', () => {
+            [...panel.children].forEach(child => {
+                if (child.className !== 'scale') {
+                    child.animate([
+                        {opacity: 0},
+                        {opacity: 0.95},
+                        {opacity: 1},
+                    ], {
+                        duration: 2000
+                    });
+                }
+
+                [...child.children].forEach(elem => {
+                    if ((+elem.value.replace(/x/, '') !== +localStorage.getItem('scale'))) {
+                        elem.animate([
+                            {opacity: 0},
+                            {opacity: 0.95},
+                            {opacity: 1},
+                        ], {
+                            duration: 2000
+                        });
+
+                        elem.style.display = '';
+                    }
+                });
+
+                child.style.display = '';
+            });
+
+            panel.addEventListener('mouseleave', () => {
+                [...panel.children].forEach(child => {
+                    if (child.className === 'scale') {
+                        [...child.children].forEach(elem => {
+                            if (!(+elem.value.replace(/x/, '') === +localStorage.getItem('scale'))) {
+                                elem.style.display = 'none';
+                            }
+                        });
+                    } else {
+                        child.style.display = 'none';
+                    }
+                });
+            });
+        });
+    }
+
+    render() {
         let scaleInputSmall = document.createElement('input');
         let scaleInputMedium = document.createElement('input');
         let panel = document.createElement('div');
+
+        this.injectStyle();
+        this.setBgColor();
+        this.onScaleChange();
+        this.bindPanel(panel);
 
         panel.append(this.btnBlock, this.colorPicker, this.clear);
         this.clear.innerHTML = `&times`;
