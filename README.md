@@ -9,19 +9,26 @@ Preview: https://quiddlee.github.io/Scale_lib/
 - Page color changer
 
 # Usage
-**1. Add script into your project**
+**1. Insert script into your index.html file**
 
 ```JavaScript
 <script src="script.js"></script>
 ```
 
-**2. Initialize Customizator in Main.js**
+**2. Be sure that you import the script file before initialization**
+  
+```JavaScript
+import Customizator from "./customizator";
+```
+  
+
+**3. Initialize Customizator in Main.js**
 
 ```JavaScript
 new Customizator().render();
 ```
 
-**3. aaand you're done!**
+**4. aaand you're done!**
 
 #
 
