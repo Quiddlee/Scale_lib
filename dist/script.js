@@ -5235,6 +5235,7 @@ var Customizator = /*#__PURE__*/function () {
   function Customizator() {
     var _this = this;
     _classCallCheck(this, Customizator);
+    this.panel = document.createElement('div');
     this.btnBlock = document.createElement('div');
     this.colorPicker = document.createElement('input');
     this.clear = document.createElement('div');
@@ -5374,11 +5375,10 @@ var Customizator = /*#__PURE__*/function () {
     value: function render() {
       var scaleInputSmall = document.createElement('input');
       var scaleInputMedium = document.createElement('input');
-      var panel = document.createElement('div');
       this.injectStyle();
       this.setBgColor();
       this.onScaleChange();
-      panel.append(this.btnBlock, this.colorPicker, this.clear);
+      this.panel.append(this.btnBlock, this.colorPicker, this.clear);
       this.clear.innerHTML = "&times";
       this.clear.classList.add('clear');
       [scaleInputSmall, scaleInputMedium].forEach(function (elem, i) {
@@ -5386,16 +5386,14 @@ var Customizator = /*#__PURE__*/function () {
         elem.setAttribute('type', 'button');
         elem.classList.add('scale_btn');
       });
-      [this.colorPicker].forEach(function (elem) {
-        elem.setAttribute('type', 'color');
-        elem.setAttribute('value', '#ffffff');
-        elem.classList.add('color');
-      });
+      this.colorPicker.setAttribute('type', 'color');
+      this.colorPicker.setAttribute('value', '#ffffff');
+      this.colorPicker.classList.add('color');
       this.btnBlock.classList.add('scale');
       this.btnBlock.append(scaleInputSmall, scaleInputMedium);
-      panel.classList.add('panel');
-      document.body.append(panel);
-      this.bindPanel(panel);
+      this.panel.classList.add('panel');
+      document.body.append(this.panel);
+      this.bindPanel(this.panel);
     }
   }]);
   return Customizator;

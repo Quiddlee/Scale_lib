@@ -1,5 +1,6 @@
 export default class Customizator {
     constructor() {
+        this.panel = document.createElement('div');
         this.btnBlock = document.createElement('div');
         this.colorPicker = document.createElement('input');
         this.clear = document.createElement('div');
@@ -205,13 +206,12 @@ export default class Customizator {
     render() {
         let scaleInputSmall = document.createElement('input');
         let scaleInputMedium = document.createElement('input');
-        let panel = document.createElement('div');
 
         this.injectStyle();
         this.setBgColor();
         this.onScaleChange();
 
-        panel.append(this.btnBlock, this.colorPicker, this.clear);
+        this.panel.append(this.btnBlock, this.colorPicker, this.clear);
         this.clear.innerHTML = `&times`;
         this.clear.classList.add('clear');
 
@@ -223,17 +223,16 @@ export default class Customizator {
             elem.classList.add('scale_btn')
         });
 
-        [this.colorPicker].forEach(elem => {
-            elem.setAttribute('type', 'color');
-            elem.setAttribute('value', '#ffffff');
-            elem.classList.add('color');
-        });
+        this.colorPicker.setAttribute('type', 'color');
+        this.colorPicker.setAttribute('value', '#ffffff');
+        this.colorPicker.classList.add('color');
 
         this.btnBlock.classList.add('scale');
         this.btnBlock.append(scaleInputSmall, scaleInputMedium);
 
-        panel.classList.add('panel');
-        document.body.append(panel);
-        this.bindPanel(panel);
+        this.panel.classList.add('panel');
+        document.body.append(this.panel);
+
+        this.bindPanel(this.panel);
     }
 }
