@@ -22,7 +22,7 @@ import Customizator from "./customizator";
 ```
   
 
-**3. Initialize Customizator in Main.js**
+**3. Initialize Customizator in Main.js file**
 
 ```JavaScript
 new Customizator().render();
@@ -34,3 +34,5 @@ new Customizator().render();
 
 **Stack:**
 1. Native JavaScript (OOP style)
+2. Gulp
+3. Webpack
