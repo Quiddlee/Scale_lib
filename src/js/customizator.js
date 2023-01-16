@@ -134,13 +134,21 @@ export default class Customizator {
 
     bindPanel(panel) {
         [...panel.children].forEach(child => {
-            child.style.display = 'none';
+            if (child.className !== 'scale') {
+                child.style.display = 'none';
+            }
+            else {
+                [...child.children].forEach(elem => {
+                    elem.style.display = 'none';
 
-            [...child.children].forEach(elem => {
-                if ((+elem.value.replace(/x/, '') === +localStorage.getItem('scale'))) {
-                    elem.style.display = '';
-                }
-            });
+                    if ((+elem.value.replace(/x/, '') === +localStorage.getItem('scale'))) {
+                        elem.style.cssText = `
+                            display: '';
+                            border-radius: 30px;
+                        `;
+                    }
+                });
+            }
         });
 
         panel.addEventListener('mouseenter', () => {
@@ -167,6 +175,9 @@ export default class Customizator {
 
                         elem.style.display = '';
                     }
+                    else {
+                        elem.style.borderRadius = '8px';
+                    }
                 });
 
                 child.style.display = '';
@@ -174,14 +185,17 @@ export default class Customizator {
 
             panel.addEventListener('mouseleave', () => {
                 [...panel.children].forEach(child => {
-                    if (child.className === 'scale') {
+                    if (child.className !== 'scale') {
+                        child.style.display = 'none';
+                    } else {
                         [...child.children].forEach(elem => {
                             if (!(+elem.value.replace(/x/, '') === +localStorage.getItem('scale'))) {
                                 elem.style.display = 'none';
                             }
+                            else {
+                                elem.style.borderRadius = '30px';
+                            }
                         });
-                    } else {
-                        child.style.display = 'none';
                     }
                 });
             });
@@ -196,7 +210,6 @@ export default class Customizator {
         this.injectStyle();
         this.setBgColor();
         this.onScaleChange();
-        this.bindPanel(panel);
 
         panel.append(this.btnBlock, this.colorPicker, this.clear);
         this.clear.innerHTML = `&times`;
@@ -221,5 +234,6 @@ export default class Customizator {
 
         panel.classList.add('panel');
         document.body.append(panel);
+        this.bindPanel(panel);
     }
 }

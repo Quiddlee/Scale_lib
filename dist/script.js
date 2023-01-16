@@ -5310,12 +5310,16 @@ var Customizator = /*#__PURE__*/function () {
     key: "bindPanel",
     value: function bindPanel(panel) {
       _toConsumableArray(panel.children).forEach(function (child) {
-        child.style.display = 'none';
-        _toConsumableArray(child.children).forEach(function (elem) {
-          if (+elem.value.replace(/x/, '') === +localStorage.getItem('scale')) {
-            elem.style.display = '';
-          }
-        });
+        if (child.className !== 'scale') {
+          child.style.display = 'none';
+        } else {
+          _toConsumableArray(child.children).forEach(function (elem) {
+            elem.style.display = 'none';
+            if (+elem.value.replace(/x/, '') === +localStorage.getItem('scale')) {
+              elem.style.cssText = "\n                            display: '';\n                            border-radius: 30px;\n                        ";
+            }
+          });
+        }
       });
       panel.addEventListener('mouseenter', function () {
         _toConsumableArray(panel.children).forEach(function (child) {
@@ -5342,20 +5346,24 @@ var Customizator = /*#__PURE__*/function () {
                 duration: 1000
               });
               elem.style.display = '';
+            } else {
+              elem.style.borderRadius = '8px';
             }
           });
           child.style.display = '';
         });
         panel.addEventListener('mouseleave', function () {
           _toConsumableArray(panel.children).forEach(function (child) {
-            if (child.className === 'scale') {
+            if (child.className !== 'scale') {
+              child.style.display = 'none';
+            } else {
               _toConsumableArray(child.children).forEach(function (elem) {
                 if (!(+elem.value.replace(/x/, '') === +localStorage.getItem('scale'))) {
                   elem.style.display = 'none';
+                } else {
+                  elem.style.borderRadius = '30px';
                 }
               });
-            } else {
-              child.style.display = 'none';
             }
           });
         });
@@ -5370,7 +5378,6 @@ var Customizator = /*#__PURE__*/function () {
       this.injectStyle();
       this.setBgColor();
       this.onScaleChange();
-      this.bindPanel(panel);
       panel.append(this.btnBlock, this.colorPicker, this.clear);
       this.clear.innerHTML = "&times";
       this.clear.classList.add('clear');
@@ -5388,6 +5395,7 @@ var Customizator = /*#__PURE__*/function () {
       this.btnBlock.append(scaleInputSmall, scaleInputMedium);
       panel.classList.add('panel');
       document.body.append(panel);
+      this.bindPanel(panel);
     }
   }]);
   return Customizator;
